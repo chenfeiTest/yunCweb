@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("Userinfo")
 public class Userinfo implements Serializable{
 	
 	/**
