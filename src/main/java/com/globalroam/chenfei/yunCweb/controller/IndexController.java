@@ -51,8 +51,15 @@ public class IndexController {
 	}
 	
 	
+	
 	@RequestMapping(value="/saveCkInfo",method = RequestMethod.POST)
 	public void saveCkInfo(@RequestParam("ckContext")Object ckContext){
 		System.out.println("内容"+ckContext.toString());
+	}
+	
+	
+	@RequestMapping(value="/updateUserInfo",method = RequestMethod.GET)
+	public void updateUserInfo(){
+		userService.updateUserInfo();
 	}
 }

@@ -10,4 +10,8 @@
 	<select id="getUser" resultType="com.globalroam.chenfei.yunCweb.domain.Userinfo">
 		select * from userinfo
 	</select>
+	
+	<delete id="deleteUser" parameterType="java.lang.String">
+		delete from userinfo where userid=#{userId}
+	</delete>
 </mapper>	

@@ -10,4 +10,6 @@ public interface UserService {
 	public void putRedis(List<Userinfo> userList);
 	
 	public String getRedis(String key);
+
+	public void updateUserInfo();
 }

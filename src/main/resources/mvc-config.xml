@@ -14,15 +14,49 @@
  http://www.springframework.org/schema/aop
  http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<context:component-scan base-package="com.globalroam.*"></context:component-scan>
-
+	
+	<!-- 视图解析，会自动解析html和jsp格式，先检查html，再检查jsp -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/"></property>
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
 		<property name="suffix" value=".jsp"></property>
+		<property name="order" value="1" />
+	</bean>
+	<!-- FreeMarker视图解析 如返回student。。在这里配置后缀名ftl和视图解析器。。 -->
+	<bean id="freemarkerViewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"></property>
+		<property name="requestContextAttribute" value="rc" />
+		<property name="prefix" value="/WEB-INF/views/"></property>
+		<property name="suffix" value=".html" />
+		<property name="contentType" value="text/html;charset=utf-8" />
+		<property name="exposeRequestAttributes" value="true" />
+		<property name="exposeSessionAttributes" value="false" />
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="order" value="0" />
 	</bean>
 	
+	<!-- freemarker配置 -->
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/" />
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="template_update_delay">0</prop>
+				<prop key="locale">zh_CN</prop>
+				<prop key="datetime_format">yyyy-MM-dd HH:mm</prop>
+				<prop key="date_format">yyyy-MM-dd</prop>
+				<prop key="number_format">#.##</prop>
+				<!-- <prop key="auto_import">/WEB-INF/view/macro/spring.ftl as spring,/WEB-INF/view/macro/macros.ftl as EC
+				</prop> -->
+				<prop key="tag_syntax">auto_detect</prop>
+			</props>
+		</property>
+	</bean>
 
 	<!-- 定位静态文件视图 -->
 	<import resource="classpath:static-resources-config.xml" />

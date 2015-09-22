@@ -49,4 +49,15 @@ public class UserServiceImpl implements UserService{
 		return userRedisDao.getUserName(key);
 	}
 
+
+
+	@Override
+	public void updateUserInfo() {
+		userDao.deleteUser("3");
+		Userinfo user = new Userinfo();
+		user.setUserName("chnefei");
+		user.setUserAddress("cd");
+		userDao.addUser(user);
+	}
+
 }

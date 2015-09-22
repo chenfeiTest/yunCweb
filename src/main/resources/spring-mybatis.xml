@@ -131,5 +131,4 @@
 	<aop:config>
 		<aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut" />
 	</aop:config>
-	<!-- <import resource="mybatis-config.xml" /> -->
 </beans>
