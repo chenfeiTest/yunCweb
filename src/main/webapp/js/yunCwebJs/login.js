@@ -63,6 +63,22 @@ function fnTime(){
 	fnFocusAct(_gbTime);		
 }
 
+$(function(){
+	$("#login-btn").on("click",function(){
+		var username = $("#login-username").val();
+		var password = $("#login-password").val();
+		$.ajax( {
+			"dataType": 'json',
+			"type": "POST",
+			"url": path+"/login/login",
+			"data": {"username":username,"password":password},
+			"success": function(data){
+				console.info("login success!");
+			}
+			} );
+	})
+})
+
 		
 
 

@@ -3,6 +3,8 @@ package com.globalroam.chenfei.yunCweb.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +29,10 @@ public class IndexController {
 	private UserService userService;
 	
 	@RequestMapping(value="/",method = RequestMethod.GET)
-	public String returnIndexPage(){
+	public String returnIndexPage(HttpServletRequest request){
 		System.out.println("comin");
+		String path = request.getServletContext().getContextPath();
+		request.setAttribute("path", path);
 		return "index";
 	}
 	
@@ -37,7 +41,8 @@ public class IndexController {
 	@RequestMapping(value="/putRedis",method = RequestMethod.GET)
 	public void putRedis(){
 		Long Stime = new Date().getTime();
-		List<Userinfo> userList = userService.getUserList();
+		System.out.println(Stime);
+		/*List<Userinfo> userList = userService.getUserList();
 		String username = userList.get(0).getUserName();
 		Long etime = new Date().getTime();
 		System.out.println("结果"+username);
@@ -47,7 +52,7 @@ public class IndexController {
 		String name = userService.getRedis("1");
 		Long Setime = new Date().getTime();
 		System.out.println("结果"+name);
-		System.out.println("redis执行时间 "+(Setime-Sstime));
+		System.out.println("redis执行时间 "+(Setime-Sstime));*/
 	}
 	
 	

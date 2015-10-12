@@ -11,8 +11,11 @@ com\globalroam\chenfei\yunCweb\util\CommonUtility$2.class
 com\globalroam\chenfei\yunCweb\domain\Userinfo.class
 com\globalroam\chenfei\yunCweb\controller\LoginController.class
 com\globalroam\chenfei\yunCweb\dao\IUserDao.class
+com\globalroam\chenfei\yunCweb\controller\UserController.class
+com\globalroam\chenfei\yunCweb\shiro\MyRealm.class
 com\globalroam\chenfei\yunCweb\controller\IndexController.class
 com\globalroam\chenfei\yunCweb\redis\dao\UserRedisDao.class
+com\globalroam\chenfei\yunCweb\util\VerifyCodeUtil.class
 com\globalroam\chenfei\yunCweb\domain\User.class
 com\globalroam\chenfei\yunCweb\redis\dao\impl\UserRedisDaoImpl$1.class
 com\globalroam\chenfei\yunCweb\util\StringTypeAdapter.class

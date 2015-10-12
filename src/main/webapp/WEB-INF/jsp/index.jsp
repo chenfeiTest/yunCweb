@@ -14,13 +14,13 @@
             <input type="button" value="保存" id="saveData"/>
         </form>
 	</body>
-	<script src="js/jquery/jquery-1.8.3.js"></script>
-	<script src="js/yunCwebJs/index.js"></script>
-	<script src="js/ckeditor/ckeditor.js"></script>
-	<script src="ckfinder/ckfinder.js"></script>
+	<script src='${path}/js/jquery/jquery-1.8.3.js'></script>
+	<script src='${path}/js/yunCwebJs/index.js'></script>
+	<script src='${path}/js/ckeditor/ckeditor.js'></script>
+	<script src='${path}/ckfinder/ckfinder.js'></script>
 	<script>
 		var editor = CKEDITOR.replace( 'editor1', {
-	    	customConfig: 'js/ckeditor/config.js'
+	    	customConfig: '${path}/js/ckeditor/config.js'
 		});
 		CKFinder.setupCKEditor( editor, 'ckfinder/' );
 	</script>
