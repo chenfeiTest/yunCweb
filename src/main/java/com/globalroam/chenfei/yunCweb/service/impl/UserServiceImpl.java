@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.globalroam.chenfei.yunCweb.dao.IUserDao;
+import com.globalroam.chenfei.yunCweb.domain.User;
 import com.globalroam.chenfei.yunCweb.domain.Userinfo;
 import com.globalroam.chenfei.yunCweb.redis.dao.UserRedisDao;
 import com.globalroam.chenfei.yunCweb.service.UserService;
@@ -58,6 +59,14 @@ public class UserServiceImpl implements UserService{
 		user.setUserName("chnefei");
 		user.setUserAddress("cd");
 		userDao.addUser(user);
+	}
+
+
+
+	@Override
+	public Userinfo getUserByCondition(Userinfo user) {
+		Userinfo resUser = userDao.getUserByConditon(user);
+		return resUser;
 	}
 
 }

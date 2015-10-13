@@ -18,6 +18,8 @@ public class Userinfo implements Serializable{
 	private String userAddress;
 	
 	private String userAge;
+	
+	private String userPassword;
 
 	public Userinfo() {
 		super();
@@ -53,6 +55,16 @@ public class Userinfo implements Serializable{
 
 	public void setUserAge(String userAge) {
 		this.userAge = userAge;
+	}
+	
+	
+
+	public String getUserPassword() {
+		return userPassword;
+	}
+
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
 
 	@Override

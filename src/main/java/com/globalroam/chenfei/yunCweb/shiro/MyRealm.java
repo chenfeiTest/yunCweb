@@ -16,6 +16,10 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.globalroam.chenfei.yunCweb.domain.Userinfo;
+import com.globalroam.chenfei.yunCweb.service.UserService;
 
 /**
  * 自定义的指定Shiro验证用户登录的类
@@ -31,6 +35,10 @@ public class MyRealm extends AuthorizingRealm {
 	 * @see 个人感觉若使用了Spring3.1开始提供的ConcurrentMapCache支持,则可灵活决定是否启用AuthorizationCache
 	 * @see 比如说这里从数据库获取权限信息时,先去访问Spring3.1提供的缓存,而不使用Shior提供的AuthorizationCache
 	 */
+	
+	@Autowired
+	private UserService userService;
+	
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals){
 		//获取当前登录的用户名,等价于(String)principals.fromRealm(this.getName()).iterator().next()
@@ -63,9 +71,21 @@ public class MyRealm extends AuthorizingRealm {
 //		SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
 //		simpleAuthorInfo.addRoles(roleList);
 //		simpleAuthorInfo.addStringPermissions(permissionList);
+		
 		SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
+		//从数据库中获取登录用户的信息
+		Userinfo user = new Userinfo();
+		user.setUserName(currentUsername);
+		Userinfo resUser = userService.getUserByCondition(user);
+		if(null!=resUser){
+			simpleAuthorInfo.addRole("admin");
+			//添加权限
+			simpleAuthorInfo.addStringPermission("admin:manage");
+			System.out.println("已为用户["+currentUsername+"]赋予了[admin]角色和[admin:manage]权限");
+			return simpleAuthorInfo;
+		}
 		//实际中可能会像上面注释的那样从数据库取得
-		if(null!=currentUsername && "jadyer".equals(currentUsername)){
+		/*if(null!=currentUsername && "jadyer".equals(currentUsername)){
 			//添加一个角色,不是配置意义上的添加,而是证明该用户拥有admin角色  
 			simpleAuthorInfo.addRole("admin");
 			//添加权限
@@ -75,7 +95,7 @@ public class MyRealm extends AuthorizingRealm {
 		}else if(null!=currentUsername && "玄玉".equals(currentUsername)){
 			System.out.println("当前用户[玄玉]无授权");
 			return simpleAuthorInfo;
-		}
+		}*/
 		//若该方法什么都不做直接返回null的话,就会导致任何用户访问/admin/listUser.jsp时都会自动跳转到unauthorizedUrl指定的地址
 		//详见applicationContext.xml中的<bean id="shiroFilter">的配置
 		return null;
@@ -104,13 +124,23 @@ public class MyRealm extends AuthorizingRealm {
 		//此处无需比对,比对的逻辑Shiro会做,我们只需返回一个和令牌相关的正确的验证信息
 		//说白了就是第一个参数填登录用户名,第二个参数填合法的登录密码(可以是从数据库中取到的,本例中为了演示就硬编码了)
 		//这样一来,在随后的登录页面上就只有这里指定的用户和密码才能通过验证
-		if("jadyer".equals(token.getUsername())){
+		
+		//从数据库中获取登录用户的信息
+		Userinfo user = new Userinfo();
+		user.setUserName(token.getUsername());
+		Userinfo resUser = userService.getUserByCondition(user);
+		/*if("jadyer".equals(token.getUsername())){
 			AuthenticationInfo authcInfo = new SimpleAuthenticationInfo("jadyer", "jadyer", this.getName());
 			this.setSession("currentUser", "jadyer");
 			return authcInfo;
 		}else if("玄玉".equals(token.getUsername())){
 			AuthenticationInfo authcInfo = new SimpleAuthenticationInfo("玄玉", "xuanyu", this.getName());
 			this.setSession("currentUser", "玄玉");
+			return authcInfo;
+		}*/
+		if(null!=resUser){
+			AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(resUser.getUserName(), resUser.getUserPassword(), this.getName());
+			this.setSession("currentUser", resUser.getUserName());
 			return authcInfo;
 		}
 		//没有返回登录用户名对应的SimpleAuthenticationInfo对象时,就会在LoginController中抛出UnknownAccountException异常

@@ -39,6 +39,9 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter{
 		URIList.add("/signin*");
 		URIList.add("/login*");
 		URIList.add("/signout/");
+		URIList.add("/404/");
+		URIList.add("/405/");
+		URIList.add("/500/");
 	}
 
 	@Override
@@ -88,7 +91,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter{
 		request.setAttribute("sessionId", request.getSession().getId());
 		request.setAttribute("remoteIP", HttpUtility.getIpFromHead(request));
 		request.setAttribute("timestamp", new Date().getTime());
-		//super.postHandle(request, response, handler, modelAndView);
+		super.postHandle(request, response, handler, modelAndView);
 		
 	}
 

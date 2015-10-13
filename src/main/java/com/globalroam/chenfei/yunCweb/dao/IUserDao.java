@@ -2,6 +2,7 @@ package com.globalroam.chenfei.yunCweb.dao;
 
 import java.util.List;
 
+import com.globalroam.chenfei.yunCweb.domain.User;
 import com.globalroam.chenfei.yunCweb.domain.Userinfo;
 
 /**
@@ -17,4 +18,6 @@ public interface IUserDao {
 	public List<Userinfo> getUser();
 	
 	public void deleteUser(String userId);
+	
+	public Userinfo getUserByConditon(Userinfo user);
 }

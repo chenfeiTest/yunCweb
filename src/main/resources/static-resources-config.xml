@@ -19,4 +19,9 @@
 	<mvc:resources location="/js/*" mapping="/js/**" />
 	<mvc:resources location="/images/*" mapping="/images/**" />
 	<mvc:resources location="/ckfinder/*" mapping="/ckfinder/**" />
+	
+	<!-- 定位静态文件视图 -->
+	<mvc:view-controller path="/404/" view-name="/errorPage/404" />
+	<mvc:view-controller path="/405/" view-name="/errorPage/405" />
+	<mvc:view-controller path="/500/" view-name="/errorPage/500" />
 </beans>

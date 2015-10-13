@@ -14,4 +14,16 @@
 	<delete id="deleteUser" parameterType="java.lang.String">
 		delete from userinfo where userid=#{userId}
 	</delete>
+	
+	<select id="getUserByConditon" parameterType="com.globalroam.chenfei.yunCweb.domain.Userinfo" resultType="com.globalroam.chenfei.yunCweb.domain.Userinfo">
+		select user_name as userName,user_password as userPassword from userinfo 
+		<where>
+			<if test="userName!=null and userName!='' ">
+				user_name =#{userName,jdbcType=VARCHAR}
+			</if>
+			<if test="userPassword!=null and userPassword!='' ">
+				and user_password =#{userPassword,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
 </mapper>	

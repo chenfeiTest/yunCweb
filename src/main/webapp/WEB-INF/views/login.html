@@ -36,15 +36,17 @@
 				<div class="wrapper">
 					<dl class="xl_info clearfix">
 						<dt class="hide">登录</dt>
+						<form action="${path}/login/login" method="post">
 						<dd>
-							<input type="text" class="srh" id="login-username">
+							<input type="text" class="srh" id="login-username" name="username">
 						</dd>
 						<dd>
-							<input type="text" class="srh" id="login-password">
+							<input type="text" class="srh" id="login-password" name="password">
 						</dd>
 						<dd>
-							<input class="button white radius4 dl" id="login-btn" type="button" value="登录" />
+							<input class="button white radius4 dl" id="login-btn" type="submit" value="登录" />
 						</dd>
+						</form>
 						<dd>
 							<input class="button blue radius4 shenqing" type="button"
 								value="立即申请" /><input class="button blue radius4 lj"

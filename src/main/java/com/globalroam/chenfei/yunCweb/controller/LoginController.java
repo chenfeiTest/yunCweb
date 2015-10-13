@@ -24,6 +24,7 @@ import org.apache.shiro.web.util.WebUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.globalroam.chenfei.yunCweb.util.VerifyCodeUtil;
@@ -99,7 +100,7 @@ public class LoginController {
     /** 
      * 用户登录 
      */  
-    @RequestMapping(value="/login", method=RequestMethod.POST)  
+    @RequestMapping(value="/login", method=RequestMethod.POST) 
     public String login(HttpServletRequest request){  
         /*String resultPageURL = InternalResourceViewResolver.FORWARD_URL_PREFIX + "/WEB-INF/views/login.html";*/ 
     	String resultPageURL = "login";
@@ -126,7 +127,7 @@ public class LoginController {
             System.out.println("对用户[" + username + "]进行登录验证..验证开始");  
             currentUser.login(token);  
             System.out.println("对用户[" + username + "]进行登录验证..验证通过");  
-            resultPageURL = "main";  
+            resultPageURL = "yunCwebMain";  
         }catch(UnknownAccountException uae){  
             System.out.println("对用户[" + username + "]进行登录验证..验证未通过,未知账户");  
             request.setAttribute("message_login", "未知账户");  
